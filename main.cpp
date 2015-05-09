@@ -77,13 +77,13 @@ void Modified_GS_Iter(const Vector<T>& b,
         {
             T sum = 0;  
             if(i > 0 && (i%(N-1)!=0))
-		        sum -= -0.25*XO[i-1];
-		    if(i < n-1 && ((i+1)%(N-1)!=0))
-		        sum -= -0.25*x[i+1];
-	        if(i >= (N-1))
-	            sum -= -0.25*x[i-N+1];
-	        if(i <= (n - N))
-	            sum -= -0.25*XO[i+N-1];
+                sum -= -0.25*XO[i-1];
+            if(i < n-1 && ((i+1)%(N-1)!=0))
+                sum -= -0.25*x[i+1];
+            if(i >= (N-1))
+                sum -= -0.25*x[i-N+1];
+            if(i <= (n - N))
+                sum -= -0.25*XO[i+N-1];
 
             x[i] = (sum+b[i]);
         }
@@ -104,40 +104,40 @@ void Modified_GS_Iter(const Vector<T>& b,
 int main(int argc, char *argv[])
 {
     int N = atoi(argv[1]);
-	MeshMatrix<double> M;
+    MeshMatrix<double> M;
     
-	Matrix<double> A;
-	SymmetricalMatrix<double> S;
-	Vector<double> b;
-	//Vector<double> ans;
-	Vector<double> XO((N-1)*(N-1));
-	Parameters<double> p = {0,PI,0,PI};
-	
-	Vector<double> sol((N-1)*(N-1));
-	for(int i = 1; i < N; i++)
-	{
-	    for(int j = 1; j < N; j++)
-	    {
-	        sol[(N-1)*(i-1)+(j-1)] = solution(p.xlb+(p.xub-p.xlb)/N*j,p.ylb+(p.yub-p.ylb)/N*i);
-	    }
-	}
+    Matrix<double> A;
+    SymmetricalMatrix<double> S;
+    Vector<double> b;
+    //Vector<double> ans;
+    Vector<double> XO((N-1)*(N-1));
+    Parameters<double> p = {0,PI,0,PI};
+    
+    Vector<double> sol((N-1)*(N-1));
+    for(int i = 1; i < N; i++)
+    {
+        for(int j = 1; j < N; j++)
+        {
+            sol[(N-1)*(i-1)+(j-1)] = solution(p.xlb+(p.xub-p.xlb)/N*j,p.ylb+(p.yub-p.ylb)/N*i);
+        }
+    }
 
 
-	PDE_Problem()(M,b,N,p,x_l,x_u,y_l,y_u);
-	
-	Solution<double> ans;
-	XO = 1;
-	Modified_GS_Iter(b,XO,0.001,100000,ans);
-	
-	//cout << ans << endl;
+    PDE_Problem()(M,b,N,p,x_l,x_u,y_l,y_u);
+    
+    Solution<double> ans;
+    XO = 1;
+    Modified_GS_Iter(b,XO,0.001,100000,ans);
+    
+    //cout << ans << endl;
 
-	//ans = SOE_Solver()(S,b);
-	
-	//XO = 1;
-	//Solution<double> ans = IM_Solver()(M,b,XO,0.001,10000,JACOBI);
+    //ans = SOE_Solver()(S,b);
+    
+    //XO = 1;
+    //Solution<double> ans = IM_Solver()(M,b,XO,0.001,10000,JACOBI);
 
     cout << ans << endl;
-	//cout << ans.sol_vec << endl;
-	
+    //cout << ans.sol_vec << endl;
+    
     return 0;
 }
