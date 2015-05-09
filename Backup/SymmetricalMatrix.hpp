@@ -4,8 +4,8 @@
 
 ////////////////////////////////////////////////////////////////
 ///
-///  Programmer :  Travis Bueter
-///  Assignment :  An Abstract Matrix Class and Some Derivatives
+///  Programmer :  Travis Bueter & Paul Sites
+///  Assignment :  Final Project - Solving Poisson's Equation
 ///
 ///  Instructor :  Prof. Clayton Price
 ///  Grader     :  Dr. Nathan "Waffles" Eloe, a.k.a. C++ Guru
@@ -202,6 +202,19 @@ Matrix<T> SymmetricalMatrix<T>::operator-(const Base_Matrix<T>& rhs) const
 	
 	return diff;
 }
+
+template <class T>
+void SymmetricalMatrix<T>::Resize(const unsigned int rows, const unsigned int cols)
+{
+	m_order = rows;
+	m_size = (rows*(rows+1))/2;
+	if(ptr_to_data != NULL)
+	    delete [] ptr_to_data;
+	ptr_to_data = new T[m_size];
+	
+	Zero();
+}
+
 
 ///////// Member functions ////////
 template <class T>
@@ -438,18 +451,6 @@ void SymmetricalMatrix<T>::Zero()
 	{
 		ptr_to_data[i] = 0;
 	}
-}
-
-template <class T>
-void SymmetricalMatrix<T>::Resize(const unsigned int order)
-{
-	m_order = order;
-	m_size = (order*(order+1))/2;
-	if(ptr_to_data != NULL)
-	    delete [] ptr_to_data;
-	ptr_to_data = new T[m_size];
-	
-	Zero();
 }
 
 //Copy Matrix Elements (Private)

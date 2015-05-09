@@ -35,7 +35,6 @@
 #include "IncompatibleVectorErr.h"
 using namespace std;
 
-//Container for the x & y bounds
 template <class T>
 struct Parameters
 {

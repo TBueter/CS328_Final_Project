@@ -4,8 +4,8 @@
 
 ////////////////////////////////////////////////////////////////
 ///
-///  Programmer :  Travis Bueter
-///  Assignment :  An Abstract Matrix Class and Some Derivatives
+///  Programmer :  Travis Bueter & Paul Sites
+///  Assignment :  Final Project - Solving Poisson's Equation
 ///
 ///  Instructor :  Prof. Clayton Price
 ///  Grader     :  Dr. Nathan "Waffles" Eloe, a.k.a. C++ Guru
@@ -120,7 +120,7 @@ class SOE_Solver
         Vector<T> Back_Substitution(const Base_Matrix<T>& A, const Vector<T>& b);
         
         ////////////////////////////////////////////////////////////////
-        ///  Func:   Back_Substitution_Inverse
+        ///  Func:   Forward_Substitution
         ///  Brief:  Implementation of Back-substitution for LT Matrix.
         ///  Pre:    T = 0 must be a valid assignment.
 		///			 T = T must be defined.
@@ -135,7 +135,7 @@ class SOE_Solver
         ///  Return: Returns the solution of the system of equations.
         ////////////////////////////////////////////////////////////////
         template <class T>
-        Vector<T> Back_Substitution_Inverse(const Base_Matrix<T>& A, const Vector<T>& b);
+        Vector<T> Forward_Substitution(const Base_Matrix<T>& A, const Vector<T>& b);
         
         ////////////////////////////////////////////////////////////////
         ///  Func:   Direct_Solve
@@ -186,7 +186,7 @@ class SOE_Solver
         ///  Return: Returns the solution of the system of equations.
         ////////////////////////////////////////////////////////////////
         template <class T>
-        Vector<T> Cholesky_Decomposition(Base_Matrix<T>& A, Vector<T>& b);		
+        Vector<T> Cholesky_Decomposition(Base_Matrix<T>& A, Vector<T>& b);
 		
 		
 		///////////////////// AUXILIARY FUNCTIONS //////////////////////

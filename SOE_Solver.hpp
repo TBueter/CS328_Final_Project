@@ -27,7 +27,7 @@
 template <class T>
 Vector<T> SOE_Solver::operator()(Base_Matrix<T>& A, Vector<T>& b)
 {
-    Vector<T> solution;
+    Vector<T> solution(0);
     
 	switch(A.getType())
 	{
@@ -72,7 +72,7 @@ Vector<T> SOE_Solver::Gaussian_Elimination(Base_Matrix<T>& A, Vector<T>& b)
 	for(k = 0; k < size; k++)
 	{
 		i_max = find_pivot(A,k);
-		if(A(i_max,k) == 0) return Vector<T>(b.getSize());
+		if(A(i_max,k) == 0) return Vector<T>(0);
 
 		row_swap(A, k, i_max);
 		b.Swap(k, i_max);

@@ -32,7 +32,37 @@
 #include "Base_Matrix.h"
 #include "Vector.h"
 #include "IncompatibleVectorErr.h"
-using namespace std;   
+using namespace std;
+
+//Container for the solution. This is used since 
+/*template <class T>
+struct Solution {
+    bool sol_found = false;
+    Vector<T> sol_vec;
+    Vector<T> init_vec;
+    T tol = 0;
+    unsigned int num_iter = 0;
+};
+
+template <class T>
+ostream& operator<<(ostream& out, const Solution<T>& s)
+{
+    if(!s.sol_found)
+    {
+        out << "No solution found in " << s.num_iter << " iterations!"
+            << endl;
+        out << "Initial Vector: " << s.init_vec << endl;
+        out << "Tolerance used: " << s.tol << endl;
+    }
+    else
+    {
+        out << "Solution:       " << s.sol_vec << endl;
+        out << "Initial Vector: " << s.init_vec << endl;
+        out << "Iter. required: " << s.num_iter << endl;
+        out << "Tolerance used: " << s.tol << endl;
+    }
+    return out;
+}*/    
 
 //Used to determine which iterative method the user wants to use.
 enum IterationType
@@ -72,6 +102,8 @@ class IM_Solver
         ///          class object to be treated as a function. Function
         ///          allows the use of defined iterative methods to
         ///          solve a system of equations.
+        ///  Pre:    System of equations must have a definite solution.
+        ///  Post:   None.
         ///  Param:  A - Matrix instance. LHS of the system of equations.
         ///  Param:  b - Vector instance. RHS of the system of equations.
         ///  Param:  XO  - Initial 'x' vector solution.
@@ -79,8 +111,7 @@ class IM_Solver
         ///  Param:  N   - Max number of iterations allowed for finding
         ///          a solution.
         ///  Param:  IT  - Iteration type to be used.
-        ///  Return: Returns a Vector containing the solution. Vector
-        ///          will be empty if no solution was found.
+        ///  Return: Returns a struct containing the el.
         ////////////////////////////////////////////////////////////////
         template <class T>
         Vector<T> operator()(const Base_Matrix<T>& A, 
@@ -94,53 +125,14 @@ class IM_Solver
         
         ////////////////////// PRIMARY FUNCTIONS ///////////////////////
         
-        ////////////////////////////////////////////////////////////////
-        ///  Func:   Jacobi_Iteration
-        ///  Brief:  Implementation of Jacobi iteration.
-        ///  Pre:    T = 0 must be a valid assignment.
-        ///          T = T must be defined.
-        ///          T - T must be defined with a result T.
-        ///          T * T must be defined with a result T.
-        ///          T / T must be defined with a result T.
-        ///          T == T must be defined with a result bool.
-        ///  Post:   Throws a incompatible Vector error if the size of
-        ///          Vector used with the Matrix are not equal.
-        ///  Param:  A - Matrix instance. LHS of the system of equations.
-        ///  Param:  b - Vector instance. RHS of the system of equations.
-        ///  Param:  XO  - Initial 'x' vector solution.
-        ///  Param:  TOL - Tolerance variable for acceptance.
-        ///  Param:  N   - Max number of iterations allowed for finding
-        ///          a solution.
-        ///  Return: Returns a Vector containing the solution. Vector
-        ///          will be empty if no solution is found.
-        ////////////////////////////////////////////////////////////////
+        
         template <class T>
         Vector<T> Jacobi_Iteration(const Base_Matrix<T>& A, 
                                    const Vector<T>& b,
                                    Vector<T>& XO,
                                    const T TOL,
                                    const unsigned int N);
-
-        ////////////////////////////////////////////////////////////////
-        ///  Func:   Gauss_Seidel_Iteration
-        ///  Brief:  Implementation of Gauss-Seidel iteration.
-        ///  Pre:    T = 0 must be a valid assignment.
-        ///          T = T must be defined.
-        ///          T - T must be defined with a result T.
-        ///          T * T must be defined with a result T.
-        ///          T / T must be defined with a result T.
-        ///          T == T must be defined with a result bool.
-        ///  Post:   Throws a incompatible Vector error if the size of
-        ///          Vector used with the Matrix are not equal.
-        ///  Param:  A - Matrix instance. LHS of the system of equations.
-        ///  Param:  b - Vector instance. RHS of the system of equations.
-        ///  Param:  XO  - Initial 'x' vector solution.
-        ///  Param:  TOL - Tolerance variable for acceptance.
-        ///  Param:  N   - Max number of iterations allowed for finding
-        ///          a solution.
-        ///  Return: Returns a Vector containing the solution. Vector
-        ///          will be empty if no solution is found.
-        ////////////////////////////////////////////////////////////////            
+                                     
         template <class T>
         Vector<T> Gauss_Seidel_Iteration(const Base_Matrix<T>& A, 
                                          const Vector<T>& b,

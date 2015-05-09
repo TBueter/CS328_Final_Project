@@ -4,8 +4,8 @@
 
 ////////////////////////////////////////////////////////////////
 ///
-///  Programmer :  Travis Bueter
-///  Assignment :  An Abstract Matrix Class and Some Derivatives
+///  Programmer :  Travis Bueter & Paul Sites
+///  Assignment :  Final Project - Solving Poisson's Equation
 ///
 ///  Instructor :  Prof. Clayton Price
 ///  Grader     :  Dr. Nathan "Waffles" Eloe, a.k.a. C++ Guru
@@ -287,6 +287,64 @@ class Vector
 		///	 Return: Returns if trying to swap the same element.
         ////////////////////////////////////////////////////////////////
 		void Swap(const unsigned int i, const unsigned int j);
+        
+        ////////////////////////////////////////////////////////////////
+        ///  Func:   == (Equivalence)
+        ///  Brief:  Overloaded equivalence operator for class. 
+        ///  Pre:    T == T (equivalence) must be defined.
+        ///  Post:   None.
+        ///  Param:  lhs - Instance of a Vector.
+        ///  Param:  rhs - Instance of a Vector.
+        ///  Return: Returns false if unequal row or column sizes or
+        ///          unequal elements. Returns true if all elements are
+        ///          found to be equal.
+        ////////////////////////////////////////////////////////////////
+        friend bool operator==(const Vector<T>& lhs, const Vector<T>& rhs)
+        {
+            if(rhs.m_size != lhs.m_size)
+            {
+                return false;
+            }
+
+            T* p = lhs.ptr_to_data + lhs.m_size;
+            T* q = rhs.ptr_to_data + rhs.m_size;
+            while(p > lhs.ptr_to_data)
+            {
+                if(*--p != *--q) 
+                    return false;
+            }
+            
+            return true;
+        }
+        
+        ////////////////////////////////////////////////////////////////
+        ///  Func:   != (Inequivalence)
+        ///  Brief:  Overloaded equivalence operator for class. 
+        ///  Pre:    T != T (Inequivalence) must be defined.
+        ///  Post:   None.
+        ///  Param:  lhs - Instance of a Vector.
+        ///  Param:  rhs - Instance of a Vector.
+        ///  Return: Returns false if unequal row or column sizes or
+        ///          unequal elements. Returns true if all elements are
+        ///          found to be equal.
+        ////////////////////////////////////////////////////////////////
+        friend bool operator!=(const Vector<T>& lhs, const Vector<T>& rhs)
+        {
+            if(rhs.m_size != lhs.m_size)
+            {
+                return true;
+            }
+
+            T* p = lhs.ptr_to_data + lhs.m_size;
+            T* q = rhs.ptr_to_data + rhs.m_size;
+            while(p > lhs.ptr_to_data)
+            {
+                if(*--p != *--q) 
+                    return true;
+            }
+            
+            return false;
+        }
         
         ////////////////////////////////////////////////////////////////
         ///  Func:   << (output)

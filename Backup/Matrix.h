@@ -4,8 +4,8 @@
 
 ////////////////////////////////////////////////////////////////
 ///
-///  Programmer :  Travis Bueter
-///  Assignment :  An Abstract Matrix Class and Some Derivatives
+///  Programmer :  Travis Bueter & Paul Sites
+///  Assignment :  Final Project - Solving Poisson's Equation
 ///
 ///  Instructor :  Prof. Clayton Price
 ///  Grader     :  Dr. Nathan "Waffles" Eloe, a.k.a. C++ Guru
@@ -253,6 +253,14 @@ class Matrix : public Base_Matrix<T>
 		///	 Return: Returns the number of columns of the matrix.
         ////////////////////////////////////////////////////////////////
 		virtual unsigned int numCols() const {return m_cols;}
+
+        ////////////////////////////////////////////////////////////////
+        ///  Func:   Resize
+        ///  Brief:  Deletes the data in the Matrix and resizes it.
+        ///  Post:   Memory has been deleted, reallocated, and all
+        ///          values set to zero.
+        ////////////////////////////////////////////////////////////////
+        virtual void Resize(const unsigned int rows, const unsigned int cols);
               
         ////////////////////////////////////////////////////////////////
         ///  Func:   getType
@@ -441,15 +449,6 @@ class Matrix : public Base_Matrix<T>
         ///  Post:   All elements set to zero.
         ////////////////////////////////////////////////////////////////
         void Zero();
-
-        ////////////////////////////////////////////////////////////////
-        ///  Func:   Resize
-        ///  Brief:  Deletes the data in the Matrix and resizes it.
-        ///  Post:   Memory has been deleted, reallocated, and all
-        ///          values set to zero.
-        ////////////////////////////////////////////////////////////////
-        void Resize(const unsigned int rows, const unsigned int cols);
-
 
         ///////////////////// The Friend Zone //////////////////////////
         

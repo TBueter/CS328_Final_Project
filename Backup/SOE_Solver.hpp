@@ -4,8 +4,8 @@
 
 ////////////////////////////////////////////////////////////////
 ///
-///  Programmer :  Travis Bueter
-///  Assignment :  An Abstract Matrix Class and Some Derivatives
+///  Programmer :  Travis Bueter & Paul Sites
+///  Assignment :  Final Project - Solving Poisson's Equation
 ///
 ///  Instructor :  Prof. Clayton Price
 ///  Grader     :  Dr. Nathan "Waffles" Eloe, a.k.a. C++ Guru
@@ -27,7 +27,7 @@
 template <class T>
 Vector<T> SOE_Solver::operator()(Base_Matrix<T>& A, Vector<T>& b)
 {
-    Vector<T> solution;
+    Vector<T> solution(0);
     
 	switch(A.getType())
 	{
@@ -38,7 +38,7 @@ Vector<T> SOE_Solver::operator()(Base_Matrix<T>& A, Vector<T>& b)
 	        solution = Back_Substitution(A,b);
             break;
         case LOWERTRIANGULAR:
-	        solution = Back_Substitution_Inverse(A,b);
+	        solution = Forward_Substitution(A,b);
             break;
         case SYMMETRICAL:
 	        solution = Cholesky_Decomposition(A,b);
@@ -109,7 +109,7 @@ Vector<T> SOE_Solver::Back_Substitution(const Base_Matrix<T>& A, const Vector<T>
 }
 
 template <class T>
-Vector<T> SOE_Solver::Back_Substitution_Inverse(const Base_Matrix<T>& A, const Vector<T>& b)
+Vector<T> SOE_Solver::Forward_Substitution(const Base_Matrix<T>& A, const Vector<T>& b)
 {
 	unsigned int size = b.getSize();
 	Vector<T> x(size);
@@ -188,7 +188,7 @@ Vector<T> SOE_Solver::Cholesky_Decomposition(Base_Matrix<T>& A, Vector<T>& b)
         A(k,k) = sqrt(A(k,k)-s);
     }
 	
-	return Back_Substitution(A,Back_Substitution_Inverse(A,b));
+	return Back_Substitution(A,Forward_Substitution(A,b));
 }
 
 

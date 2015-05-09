@@ -58,7 +58,8 @@ Vector<T> IM_Solver::Jacobi_Iteration(const Base_Matrix<T>& A,
                                       const Vector<T>& b,
                                       Vector<T>& XO,
                                       const T TOL,
-                                      const unsigned int N)
+                                      const unsigned int N,
+                                      Vector<T>& sol)
 {
     unsigned int k = 1, n = b.getSize();
     Vector<T> x(n);

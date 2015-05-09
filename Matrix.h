@@ -20,7 +20,7 @@
 ////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////
-///  Templated class definition for a mathematical matrix data
+///  Templated class definition for a mathematical dense matrix
 ///  representation. This class is based on the array class
 ///  described in the Scientific and Engineering C++ book for 
 ///  this course.
@@ -449,6 +449,7 @@ class Matrix : public Base_Matrix<T>
         ///  Post:   All elements set to zero.
         ////////////////////////////////////////////////////////////////
         void Zero();
+
 
         ///////////////////// The Friend Zone //////////////////////////
         
