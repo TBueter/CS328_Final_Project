@@ -45,17 +45,17 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     unsigned int i, j, size;
-	double input;
-	ifstream inFile;
-	
-	//Check that a parameter was given for file name
+    double input;
+    ifstream inFile;
+    
+    //Check that a parameter was given for file name
     if(!(argc > 1))
     {
         cerr << "Give valid input file. Exiting..." << endl;
         exit(1);
     }
-	
-	 // Open input file
+    
+     // Open input file
     inFile.open(argv[1], ios::in);
     if(!inFile.is_open())
     {
@@ -63,41 +63,41 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-	
-	//Get the first line which give the matrix and vector dimension.
-	string s; istringstream iss;
+    
+    //Get the first line which give the matrix and vector dimension.
+    string s; istringstream iss;
     while(getline(inFile, s) && s.empty());
     
-	iss.str(s);
-	iss >> size;
-	iss.clear();
+    iss.str(s);
+    iss >> size;
+    iss.clear();
 
-	Matrix<double> A1(size,size);
-	i = 0;
-	while(getline(inFile, s) && !s.empty())
+    Matrix<double> A1(size,size);
+    i = 0;
+    while(getline(inFile, s) && !s.empty())
     {
-		j = 0;
-		iss.str(s);
-		while(j < size && (iss >> input))
-		{
-			A1(i,j) = input;
-			j++;
-		}
-		i++;
-		iss.clear();
+        j = 0;
+        iss.str(s);
+        while(j < size && (iss >> input))
+        {
+            A1(i,j) = input;
+            j++;
+        }
+        i++;
+        iss.clear();
     }
-	
-	Vector<double> b1(size);
-	while(getline(inFile, s) && !s.empty())
+    
+    Vector<double> b1(size);
+    while(getline(inFile, s) && !s.empty())
     {
-		j = 0;
-		iss.str(s);
-		while(j < size && (iss >> input))
-		{
-			b1[j] = input;
-			j++;
-		}
-		iss.clear();
+        j = 0;
+        iss.str(s);
+        while(j < size && (iss >> input))
+        {
+            b1[j] = input;
+            j++;
+        }
+        iss.clear();
     }
     
     ///////////////////////////////////////
@@ -105,38 +105,38 @@ int main(int argc, char *argv[])
     
     iss.str(s);
     iss >> size;
-	iss.clear();
+    iss.clear();
 
-	Matrix<double> A2(size,size);
-	i = 0;
-	while(getline(inFile, s) && !s.empty())
+    Matrix<double> A2(size,size);
+    i = 0;
+    while(getline(inFile, s) && !s.empty())
     {
-		j = 0;
-		iss.str(s);
-		while(j < size && (iss >> input))
-		{
-			A2(i,j) = input;
-			j++;
-		}
-		i++;
-		iss.clear();
+        j = 0;
+        iss.str(s);
+        while(j < size && (iss >> input))
+        {
+            A2(i,j) = input;
+            j++;
+        }
+        i++;
+        iss.clear();
     }
-	
-	Vector<double> b2(size);
-	while(getline(inFile, s) && !s.empty())
+    
+    Vector<double> b2(size);
+    while(getline(inFile, s) && !s.empty())
     {
-		j = 0;
-		iss.str(s);
-		while(j < size && (iss >> input))
-		{
-			b2[j] = input;
-			j++;
-		}
-		iss.clear();
+        j = 0;
+        iss.str(s);
+        while(j < size && (iss >> input))
+        {
+            b2[j] = input;
+            j++;
+        }
+        iss.clear();
     }
-	
-	inFile.close();
-	
+    
+    inFile.close();
+    
     // These test the implementations of the Vector and Jacobi Method
     // classes as described in the homework description. Note that there
     // are some extra tests included, along with others that are 
@@ -151,16 +151,16 @@ int main(int argc, char *argv[])
     if(true)
     {
         SymmetricalMatrix<int> Test1_S;
-	    TridiagonalMatrix<int> Test1_T;
-	    DiagonalMatrix<int>    Test1_D;
-	
-	    cout << "Test 1 S Matrix:\n" << Test1_S << endl;
-	    cout << "Test 1 T Matrix:\n" << Test1_T << endl;
-	    cout << "Test 1 D Matrix:\n" << Test1_D << endl;
+        TridiagonalMatrix<int> Test1_T;
+        DiagonalMatrix<int>    Test1_D;
+    
+        cout << "Test 1 S Matrix:\n" << Test1_S << endl;
+        cout << "Test 1 T Matrix:\n" << Test1_T << endl;
+        cout << "Test 1 D Matrix:\n" << Test1_D << endl;
     }
     
     cout << endl << endl;
-	
+    
     /******************* TEST #2 *******************/
             
     cout << "Test #2:  Demonstration of the primary constructor." << endl << endl;
@@ -168,12 +168,12 @@ int main(int argc, char *argv[])
     if(true)
     {
         SymmetricalMatrix<int> Test2_S(1);
-	    TridiagonalMatrix<int> Test2_T(2);
-	    DiagonalMatrix<int>    Test2_D(3);
-	
-	    cout << "Test 2 S Matrix:\n" << Test2_S << endl;
-	    cout << "Test 2 T Matrix:\n" << Test2_T << endl;
-	    cout << "Test 2 D Matrix:\n" << Test2_D << endl;
+        TridiagonalMatrix<int> Test2_T(2);
+        DiagonalMatrix<int>    Test2_D(3);
+    
+        cout << "Test 2 S Matrix:\n" << Test2_S << endl;
+        cout << "Test 2 T Matrix:\n" << Test2_T << endl;
+        cout << "Test 2 D Matrix:\n" << Test2_D << endl;
     }
     
     cout << endl << endl;
@@ -185,12 +185,12 @@ int main(int argc, char *argv[])
     if(true)
     {
         SymmetricalMatrix<int> Test3_S(3,1);
-	    TridiagonalMatrix<int> Test3_T(4,2);
-	    DiagonalMatrix<int>    Test3_D(5,3);
-	
-	    cout << "Test 3 S Matrix:\n" << Test3_S << endl;
-	    cout << "Test 3 T Matrix:\n" << Test3_T << endl;
-	    cout << "Test 3 D Matrix:\n" << Test3_D << endl;
+        TridiagonalMatrix<int> Test3_T(4,2);
+        DiagonalMatrix<int>    Test3_D(5,3);
+    
+        cout << "Test 3 S Matrix:\n" << Test3_S << endl;
+        cout << "Test 3 T Matrix:\n" << Test3_T << endl;
+        cout << "Test 3 D Matrix:\n" << Test3_D << endl;
     }
     
     cout << endl << endl;
@@ -203,16 +203,16 @@ int main(int argc, char *argv[])
     if(true)
     {
         SymmetricalMatrix<int> Test_S(3,1);
-	    TridiagonalMatrix<int> Test_T(4,2);
-	    DiagonalMatrix<int>    Test_D(5,3);
-	    
+        TridiagonalMatrix<int> Test_T(4,2);
+        DiagonalMatrix<int>    Test_D(5,3);
+        
         SymmetricalMatrix<int> Test4_S(Test_S);
-	    TridiagonalMatrix<int> Test4_T(Test_T);
-	    DiagonalMatrix<int>    Test4_D(Test_D);
-	    
-	    cout << "Test 4 S Matrix:\n" << Test4_S << endl;
-	    cout << "Test 4 T Matrix:\n" << Test4_T << endl;
-	    cout << "Test 4 D Matrix:\n" << Test4_D << endl;
+        TridiagonalMatrix<int> Test4_T(Test_T);
+        DiagonalMatrix<int>    Test4_D(Test_D);
+        
+        cout << "Test 4 S Matrix:\n" << Test4_S << endl;
+        cout << "Test 4 T Matrix:\n" << Test4_T << endl;
+        cout << "Test 4 D Matrix:\n" << Test4_D << endl;
     }
     
     cout << endl << endl;
@@ -225,12 +225,12 @@ int main(int argc, char *argv[])
     if(true)
     {
         SymmetricalMatrix<int> Test5_S = {{6,15,55},{51,225},{979}};
-	    TridiagonalMatrix<int> Test5_T = {{1,2},{3,4,5},{6,7}};
-	    DiagonalMatrix<int>    Test5_D = {{3},{7},{-22}};
-	    
-	    cout << "Test 5 S Matrix:\n" << Test5_S << endl;
-	    cout << "Test 5 T Matrix:\n" << Test5_T << endl;
-	    cout << "Test 5 D Matrix:\n" << Test5_D << endl;
+        TridiagonalMatrix<int> Test5_T = {{1,2},{3,4,5},{6,7}};
+        DiagonalMatrix<int>    Test5_D = {{3},{7},{-22}};
+        
+        cout << "Test 5 S Matrix:\n" << Test5_S << endl;
+        cout << "Test 5 T Matrix:\n" << Test5_T << endl;
+        cout << "Test 5 D Matrix:\n" << Test5_D << endl;
     }
     
     cout << endl << endl;
@@ -263,19 +263,19 @@ int main(int argc, char *argv[])
         {
             Test6_T(0,2) = 1;
         }
-	    catch(Out_Of_Range_Err e)
-	    {
-		    cout << "T: You can't change elements outside the tridiagonal!" << endl;
-	    }
-	    
+        catch(Out_Of_Range_Err e)
+        {
+            cout << "T: You can't change elements outside the tridiagonal!" << endl;
+        }
+        
         try
         {
             Test6_D(0,1) = 1;
         }
-	    catch(Out_Of_Range_Err e)
-	    {
-		    cout << "D: You can't change elements outside the diagonal!" << endl;
-	    }
+        catch(Out_Of_Range_Err e)
+        {
+            cout << "D: You can't change elements outside the diagonal!" << endl;
+        }
     }
     
     
@@ -305,7 +305,7 @@ int main(int argc, char *argv[])
     cout << endl << endl;
     
 
-	/******************* TEST #8 *******************/
+    /******************* TEST #8 *******************/
                         
     cout << "Test #8:  Demonstration of the addition operators." << endl << endl;
 
@@ -329,7 +329,7 @@ int main(int argc, char *argv[])
                                        << Test_S  << "=\n" 
                                        << Test8_D+Test_S << endl;
                                        
-    	Test8_S += Test_T;
+        Test8_S += Test_T;
         Test8_T += Test_D;
         Test8_D += Test_S;
         
@@ -339,9 +339,9 @@ int main(int argc, char *argv[])
     }
     
     cout << endl << endl;
-	
-	
-	/******************* TEST #9 *******************/
+    
+    
+    /******************* TEST #9 *******************/
                         
     cout << "Test #9:  Demonstration of the negative and subtraction operators." << endl << endl;
 
@@ -365,7 +365,7 @@ int main(int argc, char *argv[])
                                        << Test_S  << "=\n" 
                                        << Test9_D-Test_S << endl;
                                        
-    	Test9_S -= Test_T;
+        Test9_S -= Test_T;
         Test9_T -= Test_D;
         Test9_D -= Test_S;
         
@@ -377,7 +377,7 @@ int main(int argc, char *argv[])
     cout << endl << endl;
 
 
-	/******************* TEST #10 *******************/
+    /******************* TEST #10 *******************/
                         
     cout << "Test #10:  Demonstration of the multiplication operators." << endl << endl;
     
@@ -386,7 +386,7 @@ int main(int argc, char *argv[])
         SymmetricalMatrix<int> Test_S = {{6,0,0},{51,0},{979}}; 
         TridiagonalMatrix<int> Test_T = {{1,2},{2,4,5},{5,7}};
         DiagonalMatrix<int>    Test_D = {{3},{7},{-22}};        
-    	Vector<int>            Test_V = {1,2,3};
+        Vector<int>            Test_V = {1,2,3};
         
         SymmetricalMatrix<int> Test10_S = {{6,15,55},{51,225},{979}};
         TridiagonalMatrix<int> Test10_T = {{1,2},{3,4,5},{6,7}};
@@ -404,7 +404,7 @@ int main(int argc, char *argv[])
         cout << "Test 10 2*T Matrix:\n" << 2*Test10_T << endl;
         cout << "Test 10 2*D Matrix:\n" << 2*Test10_D << endl;
                                        
-    	Test10_S *= 2;
+        Test10_S *= 2;
         Test10_T *= 2;
         Test10_D *= 2;
         
@@ -414,25 +414,25 @@ int main(int argc, char *argv[])
     }
     
     cout << endl << endl;
-	
+    
 
     cout << endl << "/*** SYSTEM OF EQUATIONS SOLVER CLASS TEST ***\\" << endl << endl;
     
-	/******************* TEST *******************/
-	
+    /******************* TEST *******************/
+    
     cout << "Test:  Demonstrate the SOE Solver implementation using the Thomas Algorithm and Cholesky Decomposition methods, via the provided dataset." << endl << endl;
     
     TridiagonalMatrix<double> T;
     T = A1;
     cout << "Matrix  T:\n" <<  T << endl;
     cout << "Vector b1:\n" << b1 << endl;
-	cout << "Thomas Algorithm Solution:\n" << SOE_Solver()(T,b1) << endl;
-	
+    cout << "Thomas Algorithm Solution:\n" << SOE_Solver()(T,b1) << endl;
+    
     SymmetricalMatrix<double> S;
     S = A2;
     cout << "Matrix  S:\n" <<  S << endl;
     cout << "Vector b2:\n" << b2 << endl;
-	cout << "Cholesky Decomposition Solution:\n" << SOE_Solver()(S,b2) << endl;
+    cout << "Cholesky Decomposition Solution:\n" << SOE_Solver()(S,b2) << endl;
 
     return 0;
 }

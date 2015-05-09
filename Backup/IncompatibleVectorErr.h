@@ -37,7 +37,7 @@ class Incompatible_Vector_Err
         ////////////////////////////////////////////////////////////////
         ///  Func:   Incompatible_Vector_Err
         ///  Brief:  Constructor for class. This is just used for 
-		///			 handling this type of error in the Vector class.
+        ///          handling this type of error in the Vector class.
         ////////////////////////////////////////////////////////////////
         Incompatible_Vector_Err() {}
 

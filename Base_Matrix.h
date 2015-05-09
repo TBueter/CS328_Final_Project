@@ -41,7 +41,7 @@ using namespace std;
 
 ////////////////////////////////////////////////////////////////
 ///  Class: Base_Matrix  
-///	 NOTE:  In the function documentation, you will often see
+///  NOTE:  In the function documentation, you will often see
 ///         '*this' and 'component values' terms. *this is the 
 ///         term used to refer to the calling object. Component
 ///         values is the term used to refer to the segments of
@@ -81,17 +81,17 @@ class Base_Matrix
         
         virtual Matrix<T> operator-(const Base_Matrix<T>& rhs) const = 0;
 
-		virtual unsigned int getSize() const = 0;
+        virtual unsigned int getSize() const = 0;
 
-		virtual unsigned int numRows() const = 0;
+        virtual unsigned int numRows() const = 0;
 
-		virtual unsigned int numCols() const = 0;
-		
-		virtual void Resize(const unsigned int rows, const unsigned int cols) = 0;
-		
-		virtual MatrixType getType() const = 0;
+        virtual unsigned int numCols() const = 0;
+        
+        virtual void Resize(const unsigned int rows, const unsigned int cols) = 0;
+        
+        virtual MatrixType getType() const = 0;
 
-		virtual T* getPtr() const = 0;
+        virtual T* getPtr() const = 0;
 
 };
 #endif //BASE_MATRIX_H

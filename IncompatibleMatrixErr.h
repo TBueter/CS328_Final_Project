@@ -37,7 +37,7 @@ class Incompatible_Matrix_Err
         ////////////////////////////////////////////////////////////////
         ///  Func:   Incompatible_Matrix_Err
         ///  Brief:  Constructor for class. This is just used for 
-		///			 handling this type of error in the Matrix class.
+        ///          handling this type of error in the Matrix class.
         ////////////////////////////////////////////////////////////////
         Incompatible_Matrix_Err() {}
 

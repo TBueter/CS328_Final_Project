@@ -78,7 +78,7 @@ class TridiagonalMatrix : public Base_Matrix<T>
         ///          Memory is allocated for storing n*n components, all 
         ///          initialized to zero. 
         ///  Param:  order - Non-negative integer used to define the  
-		///			 number of rows and columns for the matrix.
+        ///          number of rows and columns for the matrix.
         ////////////////////////////////////////////////////////////////
         TridiagonalMatrix(const unsigned int order);
         
@@ -92,7 +92,7 @@ class TridiagonalMatrix : public Base_Matrix<T>
         ///          Memory is allocated for storing n*n components, all 
         ///          initialized to the given value. 
         ///  Param:  order - Non-negative integer used to define the  
-		///			 number of rows and columns for the matrix.
+        ///          number of rows and columns for the matrix.
         ///  Param:  value - Instance of template type that all 
         ///          elements of the matrix are set to.
         ////////////////////////////////////////////////////////////////
