@@ -39,16 +39,7 @@
 #include "IncompatibleMatrixErr.h"
 using namespace std;
 
-////////////////////////////////////////////////////////////////
-///  Class: Base_Matrix  
-///  NOTE:  In the function documentation, you will often see
-///         '*this' and 'component values' terms. *this is the 
-///         term used to refer to the calling object. Component
-///         values is the term used to refer to the segments of
-///         allocated memory ptr_to_data points to. I don't feel
-///         these were the best usage of words but didn't know
-///         how to refer to them properly in the documentation.   
-////////////////////////////////////////////////////////////////
+
 template<class T>
 class Matrix;
 
@@ -65,6 +56,16 @@ enum MatrixType
     MESH
 };
 
+////////////////////////////////////////////////////////////////
+///  Class: Base_Matrix  
+///  NOTE:  In the function documentation, you will often see
+///         '*this' and 'component values' terms. *this is the 
+///         term used to refer to the calling object. Component
+///         values is the term used to refer to the segments of
+///         allocated memory ptr_to_data points to. I don't feel
+///         these were the best usage of words but didn't know
+///         how to refer to them properly in the documentation.   
+////////////////////////////////////////////////////////////////
 template <class T>
 class Base_Matrix
 {

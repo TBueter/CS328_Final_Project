@@ -29,7 +29,7 @@ Vector<T> IM_Solver::operator()(const Base_Matrix<T>& A,
                                 const Vector<T>& b,
                                 Vector<T>& XO,
                                 const T TOL,
-                                const unsigned int N,
+                                const unsigned int Limit,
                                 IterationType IT)
 {
     Vector<T> solution(0);
@@ -37,10 +37,10 @@ Vector<T> IM_Solver::operator()(const Base_Matrix<T>& A,
     switch(IT)
     {
         case JACOBI:
-            solution = Jacobi_Iteration(A,b,XO,TOL,N);
+            solution = Jacobi_Iteration(A,b,XO,TOL,Limit);
             break;
         case GAUSS_SEIDEL:         
-            solution = Gauss_Seidel_Iteration(A,b,XO,TOL,N);
+            solution = Gauss_Seidel_Iteration(A,b,XO,TOL,Limit);
             break;
         default:
             cout << "ERROR" << endl;
@@ -58,7 +58,7 @@ Vector<T> IM_Solver::Jacobi_Iteration(const Base_Matrix<T>& A,
                                       const Vector<T>& b,
                                       Vector<T>& XO,
                                       const T TOL,
-                                      const unsigned int N)
+                                      const unsigned int Limit)
 {
     unsigned int k = 1, n = b.getSize();
     Vector<T> x(n);
@@ -66,7 +66,7 @@ Vector<T> IM_Solver::Jacobi_Iteration(const Base_Matrix<T>& A,
     if(A.numCols() != n || A.numRows() != n || XO.getSize() != n)
         throw Incompatible_Vector_Err();
      
-    while(k <= N)
+    while(k <= Limit)
     {
         for(unsigned int i = 0; i < n; i++)
         {
@@ -96,7 +96,7 @@ Vector<T> IM_Solver::Gauss_Seidel_Iteration(const Base_Matrix<T>& A,
                                             const Vector<T>& b,
                                             Vector<T>& XO,
                                             const T TOL,
-                                            const unsigned int N)
+                                            const unsigned int Limit)
 {
     unsigned int k = 1, n = b.getSize();
     Vector<T> x(n);
@@ -104,7 +104,7 @@ Vector<T> IM_Solver::Gauss_Seidel_Iteration(const Base_Matrix<T>& A,
     if(A.numCols() != n || A.numRows() != n || XO.getSize() != n)
         throw Incompatible_Vector_Err();
      
-    while(k <= N)
+    while(k <= Limit)
     {
         for(unsigned int i = 0; i < n; i++)
         {

@@ -87,7 +87,7 @@ class IM_Solver
                              const Vector<T>& b,
                              Vector<T>& XO,
                              const T TOL,
-                             const unsigned int N,
+                             const unsigned int Limit,
                              IterationType IT);
         
     private:
@@ -119,7 +119,7 @@ class IM_Solver
                                    const Vector<T>& b,
                                    Vector<T>& XO,
                                    const T TOL,
-                                   const unsigned int N);
+                                   const unsigned int Limit);
 
         ////////////////////////////////////////////////////////////////
         ///  Func:   Gauss_Seidel_Iteration
@@ -146,7 +146,7 @@ class IM_Solver
                                          const Vector<T>& b,
                                          Vector<T>& XO,
                                          const T TOL,
-                                         const unsigned int N);
+                                         const unsigned int Limit);
                                      
         ///////////////////// AUXILIARY FUNCTIONS //////////////////////
         

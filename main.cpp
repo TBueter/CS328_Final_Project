@@ -7,15 +7,14 @@
 #include <string>
 #include <vector>
 #include "Matrix.h"
-#include "Vector.h"
 #include "SymmetricalMatrix.h"
-#include "MeshMatrix.h"
+#include "Vector.h"
 #include "SOE_Solver.h"
 #include "IM_Solver.h"
-#include "PDE_Problem.h"
+#include "Central_Diff_Oh2.h"
 using namespace std;
 
-#define PI 3.14159265359
+#define PI 3.14159265358979323846
 
 double x_l(double x, double y)
 {
@@ -54,7 +53,7 @@ T L2_norm(const Vector<T>& x)
     return norm;
 }
 
-template <class T>
+/*template <class T>
 void Modified_GS_Iter(const Vector<T>& b,
                       Vector<T>& XO,
                       const T TOL,
@@ -99,11 +98,54 @@ void Modified_GS_Iter(const Vector<T>& b,
         XO = x;
     }
     sol.num_iter = Limit;
-}
+}*/
 
 int main(int argc, char *argv[])
 {
     int N = atoi(argv[1]);
+    Base_Matrix<double>* mat;
+    Vector<double> b;
+    Vector<double> x_axis;
+    Vector<double> y_axis;
+    Vector<double> ans;
+    Vector<double> sol;
+    Parameters<double> p = {0,PI,0,PI};
+    
+    Central_Diff_Oh2 CD;
+    
+    mat = new SymmetricalMatrix<double>();
+    CD.generate_Matrix((*mat),N);
+    CD.generate_Vector(b,N,p,x_l,x_u,y_l,y_u);
+    CD.generate_Axes(x_axis,y_axis,N,p);
+    CD.generate_Solution(sol,N,p,solution);
+    
+    //cout << S << endl;
+    //cout << b << endl;
+    //cout << sol << endl;
+    
+    //ans = SOE_Solver()(S,b);
+    /*for(int i = 0, len = x_axis.getSize()-10; i > len; i--)
+    {
+        //cout << sol[i] << " " << ans[i] << " " << sol[i] - ans[i] << endl;
+        cout << x_axis[i] << " " << y_axis[i] << " " << sol[i] << endl;
+    }*/
+    
+    for(int i = 0; i < y_axis.getSize(); i++)
+    {
+        for(int j = 0; j < x_axis.getSize(); j++)
+        {
+            //cout << x_axis[j]<< " " << y_axis[i] << " " << sol[(N-1)*i+j] << endl; 
+        }
+    }
+    
+    //cout << x_axis << endl;
+    //cout << y_axis << endl;
+    
+    cout << *mat << endl;
+    
+    delete mat;
+    
+    /*int N = atoi(argv[1]);
     MeshMatrix<double> M;
     
     Matrix<double> A;
@@ -127,7 +169,7 @@ int main(int argc, char *argv[])
     
     Solution<double> ans;
     XO = 1;
-    Modified_GS_Iter(b,XO,0.001,100000,ans);
+    Modified_GS_Iter(b,XO,0.001,100000,ans);*/
     
     //cout << ans << endl;
 
@@ -136,7 +178,7 @@ int main(int argc, char *argv[])
     //XO = 1;
     //Solution<double> ans = IM_Solver()(M,b,XO,0.001,10000,JACOBI);
 
-    cout << ans << endl;
+    //cout << ans << endl;
     //cout << ans.sol_vec << endl;
     
     return 0;

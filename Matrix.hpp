@@ -20,7 +20,7 @@
 ////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////
-///  Templated class definition for a mathematical matrix data
+///  Templated class definition for a mathematical dense matrix
 ///  representation. This class is based on the array class
 ///  described in the Scientific and Engineering C++ book for 
 ///  this course.

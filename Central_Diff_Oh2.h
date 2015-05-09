@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////
-///  PDE_Problem.h
+///  Central_Diff_Oh2.h
 ////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////
@@ -24,8 +24,8 @@
 ///  a system of equations.
 ////////////////////////////////////////////////////////////////
 
-#ifndef  PDE_PROBLEM_H
-#define  PDE_PROBLEM_H
+#ifndef  CENTRAL_DIFF_OH2_H
+#define  CENTRAL_DIFF_OH2_H
 
 #include <vector>
 #include <iostream>
@@ -46,29 +46,29 @@ struct Parameters
 };
 
 ////////////////////////////////////////////////////////////////
-///  Class: PDE_Problem
+///  Class: Central_Diff_Oh2
 ///  Brief: Functor for calculating the solution for a system
 ///         of equations.
 ////////////////////////////////////////////////////////////////
-class PDE_Problem
+class Central_Diff_Oh2
 {
     public:
         
         ////////////////////////////////////////////////////////////////
-        ///  Func:   PDE_Problem (Default)
+        ///  Func:   Central_Diff_Oh2 (Default)
         ///  Brief:  Default constructor for class.
         ///  Pre:    None
         ///  Post:   None
         ////////////////////////////////////////////////////////////////
-        PDE_Problem() {}
+        Central_Diff_Oh2() {}
         
         ////////////////////////////////////////////////////////////////
-        ///  Func:   ~PDE_Problem (Default)
+        ///  Func:   ~Central_Diff_Oh2 (Default)
         ///  Brief:  Default deconstructor for class.
         ///  Pre:    None
         ///  Post:   None
         ////////////////////////////////////////////////////////////////
-        ~PDE_Problem() {}
+        ~Central_Diff_Oh2() {}
         
         ////////////////////////////////////////////////////////////////
         ///  Func:   () (Parenthesis)
@@ -83,16 +83,40 @@ class PDE_Problem
         ///  Return: Returns an instance of a Vector that represents
         ///          the solution for the system of equations.
         ////////////////////////////////////////////////////////////////
-        template <class T, typename F>
-        void operator()(Base_Matrix<T>& A, 
-                        Vector<T>& b,
-                        const unsigned int N,
-                        const Parameters<T> p,
-                        const F xlf,
-                        const F xuf,
-                        const F ylf,
-                        const F yuf);
+        template <class T>
+        void generate_Matrix(Base_Matrix<T>& A, const unsigned int N);
+                        
+        template <class T, class T_function>
+        void generate_Vector(Vector<T>& b,
+                             const unsigned int N,
+                             const Parameters<T> p,
+                             const T_function xlf,
+                             const T_function xuf,
+                             const T_function ylf,
+                             const T_function yuf);
+        
+        template <class T>                 
+        void generate_Axes(Vector<T>& x_axis,
+                           Vector<T>& y_axis,
+                           const unsigned int N,
+                           const Parameters<T> p);
+                           
+        template <class T, class T_function>
+        void generate_Solution(Vector<T>& sol, 
+                               const unsigned int N, 
+                               const Parameters<T> p,
+                               const T_function f);
+        
+        template <class T>             
+        Vector<T> Special_Solver(const Vector<T>& b,
+                                 Vector<T>& XO,
+                                 const T TOL,
+                                 const unsigned int Limit);          
+
+    private:
+        template <class T>
+        T L2_norm(const Vector<T>& x);
 };
 
-#include "PDE_Problem.hpp"
-#endif //PDE_PROBLEM_H
+#include "Central_Diff_Oh2.hpp"
+#endif //CENTRAL_DIFF_OH2_H
