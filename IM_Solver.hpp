@@ -21,7 +21,7 @@
 
 ////////////////////////////////////////////////////////////////
 ///  Function class definition for calculating the solution for 
-///	 a system of equations using iterative methods.
+///  a system of equations using iterative methods.
 ////////////////////////////////////////////////////////////////
 
 template <class T>
@@ -34,20 +34,20 @@ Vector<T> IM_Solver::operator()(const Base_Matrix<T>& A,
 {
     Vector<T> solution(0);
     
-	switch(IT)
-	{
-	    case JACOBI:
-	        solution = Jacobi_Iteration(A,b,XO,TOL,N);
-	        break;
+    switch(IT)
+    {
+        case JACOBI:
+            solution = Jacobi_Iteration(A,b,XO,TOL,N);
+            break;
         case GAUSS_SEIDEL:         
-	        solution = Gauss_Seidel_Iteration(A,b,XO,TOL,N);
+            solution = Gauss_Seidel_Iteration(A,b,XO,TOL,N);
             break;
         default:
             cout << "ERROR" << endl;
             break;
     }
     
-	return solution;
+    return solution;
 }
 
 

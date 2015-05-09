@@ -21,7 +21,7 @@
 
 ////////////////////////////////////////////////////////////////
 ///  Function class definition for calculating the solution for 
-///     a system of equations using iterative methods.
+///  a system of equations using iterative methods.
 ////////////////////////////////////////////////////////////////
 
 #ifndef  IM_SOLVER_H
