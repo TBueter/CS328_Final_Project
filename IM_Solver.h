@@ -4,8 +4,8 @@
 
 ////////////////////////////////////////////////////////////////
 ///
-///  Programmer :  Travis Bueter
-///  Assignment :  An Abstract Matrix Class and Some Derivatives
+///  Programmer :  Travis Bueter & Paul Sites
+///  Assignment :  Final Project - Solving Poisson's Equation
 ///
 ///  Instructor :  Prof. Clayton Price
 ///  Grader     :  Dr. Nathan "Waffles" Eloe, a.k.a. C++ Guru
@@ -21,7 +21,7 @@
 
 ////////////////////////////////////////////////////////////////
 ///  Function class definition for calculating the solution for 
-///	 a system of equations.
+///     a system of equations using iterative methods.
 ////////////////////////////////////////////////////////////////
 
 #ifndef  IM_SOLVER_H
@@ -34,7 +34,7 @@
 #include "IncompatibleVectorErr.h"
 using namespace std;
 
-
+//Container for the solution. This is used since 
 template <class T>
 struct Solution {
     bool sol_found = false;
@@ -64,6 +64,7 @@ ostream& operator<<(ostream& out, const Solution<T>& s)
     return out;
 }       
 
+//Used to determine which iterative method the user wants to use.
 enum IterationType
 {
     JACOBI = 0,
@@ -73,7 +74,7 @@ enum IterationType
 ////////////////////////////////////////////////////////////////
 ///  Class: IM_Solver
 ///  Brief: Functor for calculating the solution for a system
-///			of equations.
+///         of equations using iterative methods.
 ////////////////////////////////////////////////////////////////
 class IM_Solver
 {
@@ -99,52 +100,55 @@ class IM_Solver
         ///  Func:   () (Parenthesis)
         ///  Brief:  Overloaded parenthesis operator for class. Allows 
         ///          class object to be treated as a function. Function
-        ///          uses gaussian elimination and back-substitution to
-		///			 solve a system of equations.
+        ///          allows the use of defined iterative methods to
+        ///          solve a system of equations.
         ///  Pre:    System of equations must have a definite solution.
         ///  Post:   None.
         ///  Param:  A - Matrix instance. LHS of the system of equations.
-		///	 Param:  b - Vector instance. RHS of the system of equations.
-        ///  Return: Returns an instance of a Vector that represents
-		///			 the solution for the system of equations.
+        ///  Param:  b - Vector instance. RHS of the system of equations.
+        ///  Param:  XO  - Initial 'x' vector solution.
+        ///  Param:  TOL - Tolerance variable for acceptance.
+        ///  Param:  N   - Max number of iterations allowed for finding
+        ///          a solution.
+        ///  Param:  IT  - Iteration type to be used.
+        ///  Return: Returns a struct containing the el.
         ////////////////////////////////////////////////////////////////
         template <class T>
-        Solution<T> operator()(const Base_Matrix<T>& A, 
-                               const Vector<T>& b,
-                               Vector<T>& XO,
-                               const T TOL,
-                               const unsigned int N,
-                               IterationType IT);
+        Vector<T> operator()(const Base_Matrix<T>& A, 
+                             const Vector<T>& b,
+                             Vector<T>& XO,
+                             const T TOL,
+                             const unsigned int N,
+                             IterationType IT);
         
     private:
         
         ////////////////////// PRIMARY FUNCTIONS ///////////////////////
-		
-		template <class T>
-		void Jacobi_Iteration(const Base_Matrix<T>& A, 
-                              const Vector<T>& b,
-                              Vector<T>& XO,
-                              const T TOL,
-                              const unsigned int N,
-                              Solution<T>& sol);
-		                             
+        
+        
         template <class T>
-		void Gauss_Seidel_Iteration(const Base_Matrix<T>& A, 
-                                    const Vector<T>& b,
-                                    Vector<T>& XO,
-                                    const T TOL,
-                                    const unsigned int N,
-                                    Solution<T>& sol);
-		                             
-		///////////////////// AUXILIARY FUNCTIONS //////////////////////
-		
-		////////////////////////////////////////////////////////////////
+        Vector<T> Jacobi_Iteration(const Base_Matrix<T>& A, 
+                                   const Vector<T>& b,
+                                   Vector<T>& XO,
+                                   const T TOL,
+                                   const unsigned int N);
+                                     
+        template <class T>
+        Vector<T> Gauss_Seidel_Iteration(const Base_Matrix<T>& A, 
+                                         const Vector<T>& b,
+                                         Vector<T>& XO,
+                                         const T TOL,
+                                         const unsigned int N);
+                                     
+        ///////////////////// AUXILIARY FUNCTIONS //////////////////////
+        
+        ////////////////////////////////////////////////////////////////
         ///  Func:   L2_norm
         ///  Brief:  Calculates the L2 Norm of a Vector.
         ///  Pre:    T = 0 must be a valid assignment.
-		///			 T += T must be defined.
-		///			 T * T must be defined with a result T.
-		///			 sqrt(T) must be defined with a result T.
+        ///          T += T must be defined.
+        ///          T * T must be defined with a result T.
+        ///          sqrt(T) must be defined with a result T.
         ///  Post:   None
         ///  Return: Returns the calculated norm value.
         ////////////////////////////////////////////////////////////////

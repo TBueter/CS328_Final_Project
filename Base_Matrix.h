@@ -4,8 +4,8 @@
 
 ////////////////////////////////////////////////////////////////
 ///
-///  Programmer :  Travis Bueter
-///  Assignment :  An Abstract Matrix Class and Some Derivatives
+///  Programmer :  Travis Bueter & Paul Sites
+///  Assignment :  Final Project - Solving Poisson's Equation
 ///
 ///  Instructor :  Prof. Clayton Price
 ///  Grader     :  Dr. Nathan "Waffles" Eloe, a.k.a. C++ Guru
@@ -20,10 +20,8 @@
 ////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////
-///  Templated class definition for a mathematical matrix data
-///  representation. This class is based on the array class
-///  described in the Scientific and Engineering C++ book for 
-///  this course.
+///  Templated abstract class definition for mathematical matrix
+///  representations.
 ////////////////////////////////////////////////////////////////
 
 #ifndef  BASE_MATRIX_H
@@ -43,17 +41,19 @@ using namespace std;
 
 ////////////////////////////////////////////////////////////////
 ///  Class: Base_Matrix  
-///	 NOTE: In the function documentation, you will often see
-///        '*this' and 'component values' terms. *this is the 
-///        term used to refer to the calling object. Component
-///        values is the term used to refer to the segments of
-///        allocated memory ptr_to_data points to. I don't feel
-///        these were the best usage of words but didn't know
-///        how to refer to them properly in the documentation.   
+///	 NOTE:  In the function documentation, you will often see
+///         '*this' and 'component values' terms. *this is the 
+///         term used to refer to the calling object. Component
+///         values is the term used to refer to the segments of
+///         allocated memory ptr_to_data points to. I don't feel
+///         these were the best usage of words but didn't know
+///         how to refer to them properly in the documentation.   
 ////////////////////////////////////////////////////////////////
 template<class T>
 class Matrix;
 
+//Used for identifying matrix types when using a reference to the
+//abstract class type.
 enum MatrixType
 {
     STANDARD = 0,

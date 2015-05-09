@@ -1,4 +1,21 @@
-       
+
+////////////////////////////////////////////////////////////////
+///
+///  Programmer :  Travis Bueter & Paul Sites
+///  Assignment :  Final Project - Solving Poisson's Equation
+///
+///  Instructor :  Prof. Clayton Price
+///  Grader     :  Dr. Nathan "Waffles" Eloe, a.k.a. C++ Guru
+///                Ph.D., Computer Science
+///                B.S., Computer Science
+///                B.S., Physics
+///                Judan, C++ Ninjutsu
+/// 
+///  Course     :  CS5201
+///  Semester   :  Spring 2015
+///
+////////////////////////////////////////////////////////////////
+
 template <class T, typename F>
 void PDE_Problem::operator()(Base_Matrix<T>& A, 
                              Vector<T>& b,

@@ -4,8 +4,8 @@
 
 ////////////////////////////////////////////////////////////////
 ///
-///  Programmer :  Travis Bueter
-///  Assignment :  An Abstract Matrix Class and Some Derivatives
+///  Programmer :  Travis Bueter & Paul Sites
+///  Assignment :  Final Project - Solving Poisson's Equation
 ///
 ///  Instructor :  Prof. Clayton Price
 ///  Grader     :  Dr. Nathan "Waffles" Eloe, a.k.a. C++ Guru
@@ -21,20 +21,18 @@
 
 ////////////////////////////////////////////////////////////////
 ///  Function class definition for calculating the solution for 
-///	 a system of equations.
+///	 a system of equations using iterative methods.
 ////////////////////////////////////////////////////////////////
 
 template <class T>
-Solution<T> IM_Solver::operator()(const Base_Matrix<T>& A, 
-                                  const Vector<T>& b,
-                                  Vector<T>& XO,
-                                  const T TOL,
-                                  const unsigned int N,
-                                  IterationType IT)
+Vector<T> IM_Solver::operator()(const Base_Matrix<T>& A, 
+                                const Vector<T>& b,
+                                Vector<T>& XO,
+                                const T TOL,
+                                const unsigned int N,
+                                IterationType IT)
 {
-    Solution<T> sol;
-    sol.init_vec = XO;
-    sol.tol = TOL;
+    Vector<T> sol(0);
     
 	switch(IT)
 	{
@@ -61,7 +59,7 @@ void IM_Solver::Jacobi_Iteration(const Base_Matrix<T>& A,
                                  Vector<T>& XO,
                                  const T TOL,
                                  const unsigned int N,
-                                 Solution<T>& sol)
+                                 Vector<T>& sol)
 {
     unsigned int k = 1, n = b.getSize();
     Vector<T> x(n);
@@ -86,24 +84,21 @@ void IM_Solver::Jacobi_Iteration(const Base_Matrix<T>& A,
         
         if(L2_norm(x-XO) < TOL)
         {
-            sol.sol_vec = x;
-            sol.num_iter = k;
-            sol.sol_found = true;
+            sol = x;
             return;
         }
         k++;
         XO = x;
     }
-    sol.num_iter = N;
+    
 }
 
 template <class T>
-void IM_Solver::Gauss_Seidel_Iteration(const Base_Matrix<T>& A, 
-                                       const Vector<T>& b,
-                                       Vector<T>& XO,
-                                       const T TOL,
-                                       const unsigned int N,
-                                       Solution<T>& sol)
+Vector<T> IM_Solver::Gauss_Seidel_Iteration(const Base_Matrix<T>& A, 
+                                            const Vector<T>& b,
+                                            Vector<T>& XO,
+                                            const T TOL,
+                                            const unsigned int N)
 {
     unsigned int k = 1, n = b.getSize();
     Vector<T> x(n);
@@ -132,15 +127,12 @@ void IM_Solver::Gauss_Seidel_Iteration(const Base_Matrix<T>& A,
         
         if(L2_norm(x-XO) < TOL)
         {
-            sol.sol_vec = x;
-            sol.num_iter = k;
-            sol.sol_found = true;
+            sol = x;
             return;
         }
         k++;
         XO = x;
     }
-    sol.num_iter = N;
 }
  
 
