@@ -4,8 +4,8 @@
 
 ###############################################################################
 #
-#  Programmer :  Travis Bueter
-#  Assignment :  An Abstract Matrix Class and Some Derivatives
+#  Programmer :  Travis Bueter & Paul Sites
+#  Assignment :  Final Project - Solving Poisson's Equation
 #
 #  Instructor :  Prof. Clayton Price
 #  Grader     :  Dr. Nathan "Waffles" Eloe, a.k.a. C++ Guru
@@ -27,13 +27,13 @@
 .PHONY: all clean
 
 CXX = /usr/bin/g++
-CXXFLAGS = -std=c++11 -g -Wall -W -pedantic-errors
+CXXFLAGS = -std=c++11 -g -Wall -W -pedantic-errors -Wunused-parameter
 
 # With Sun's make it has to be done like this, instead of
 # using wildcards.
 # Well, I haven't figured out another way yet.
 SOURCES = driver.cpp
-HEADERS = Matrix.h Vector.h SOE_Solver.h OutOfRangeErr.h IncompatibleVectorErr.h IncompatibleMatrixErr.h Base_Matrix.h LowerTriangularMatrix.h UpperTriangularMatrix.h TridiagonalMatrix.h DiagonalMatrix.h SymmetricalMatrix.h
+HEADERS = Matrix.h Vector.h SOE_Solver.h OutOfRangeErr.h IncompatibleVectorErr.h IncompatibleMatrixErr.h Base_Matrix.h SymmetricalMatrix.h IM_Solver.h Central_Diff_Oh2.h
 
 # Looks like it can be done like this, but won't work for gmake.
 #SOURCES:sh = ls *.cpp
