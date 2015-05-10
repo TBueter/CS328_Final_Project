@@ -83,22 +83,21 @@ const Parameters<double> p = {0,PI,0,PI};
 ////////////////////////////////////////////////////////////////
 // List of run commands (See ReadMe for more details)         //
 //                                                            //
-//  ./driver <runID> <mesh_size> soe  <Method>                //
-//  ./driver <runID> <mesh_size> it   <Method> <TOL> <Limit>  //
-//  ./driver <runID> <mesh_size> spec <TOL> <Limit>           //
+//  ./driver <mesh_size> soe  <Method>                        //
+//  ./driver <mesh_size> it   <Method> <TOL> <Limit>          //
+//  ./driver <mesh_size> spec <TOL> <Limit>                   //
 ////////////////////////////////////////////////////////////////
 
 int main(int argc, char* argv[])
 {
-    if(argc < 4)
+    if(argc < 3)
     {
         cout << "Run information missing. Check parameters listed in ReadMe.txt." << endl;
         exit(1);
     }
     
     //General-use variables
-    unsigned int runID = atoi(argv[1]);
-    unsigned int N = atoi(argv[2]);
+    unsigned int N = atoi(argv[1]);
     
     stringstream filename; 
     
@@ -116,10 +115,10 @@ int main(int argc, char* argv[])
     CD.generate_Axes(x_axis,y_axis,N,p);
     CD.generate_Solution(sol,N,p,solution);
     
-    char method[5];
-    strcpy(method, argv[3]);
+    char method[10];
+    strcpy(method, argv[2]);
     
-    filename << "Run_Folder/run" << runID << "_N" << N << "_" << method;
+    filename << "Run_Folder/" << "N" << N << "_" << method;
     
     //Get start time
     time_t start = time(0);
@@ -127,13 +126,13 @@ int main(int argc, char* argv[])
     //Run method
     if(!strcmp(method,"soe"))
     {
-        if(argc != 5)
+        if(argc != 4)
         {
             cout << "SOE: Incorrect number of parameters given. Check parameters listed in Readme.txt." << endl;
             exit(1);
         }
         
-        int type = atoi(argv[4]);
+        int type = atoi(argv[3]);
         if(type == STANDARD)
         {
             filename << "_std";
@@ -155,15 +154,15 @@ int main(int argc, char* argv[])
     }
     else if(!strcmp(method,"it"))
     {
-        if(argc != 7)
+        if(argc != 6)
         {
             cout << "IT: Incorrect number of parameters given. Check parameters listed in Readme.txt." << endl;
             exit(1);
         }
         
-        IterationType IT = static_cast<IterationType>(atoi(argv[4]));
-        double TOL = atof(argv[5]);
-        int limit = atoi(argv[6]);
+        IterationType IT = static_cast<IterationType>(atoi(argv[3]));
+        double TOL = atof(argv[4]);
+        int limit = atoi(argv[5]);
         
         Vector<double> XO((N-1)*(N-1));
         XO = 1;
@@ -188,14 +187,14 @@ int main(int argc, char* argv[])
     }
     else if(!strcmp(method,"spec"))
     {
-        if(argc != 6)
+        if(argc != 5)
         {
             cout << "SPEC: Incorrect number of parameters for special method run. Check parameters listed in Readme.txt." << endl;
             exit(1);
         }
         
-        double TOL = atof(argv[4]);
-        int limit = atoi(argv[5]);
+        double TOL = atof(argv[3]);
+        int limit = atoi(argv[4]);
         
         Vector<double> XO((N-1)*(N-1));
         XO = 1;
