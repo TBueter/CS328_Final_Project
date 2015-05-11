@@ -111,6 +111,18 @@ class Matrix : public Base_Matrix<T>
         Matrix(const Matrix<T>& src);
         
         ////////////////////////////////////////////////////////////////
+        ///  Func:   Matrix (Copy)
+        ///  Brief:  Copy constructor for class. Creates a new Matrix 
+        ///          that is a clone of the given Matrix.
+        ///  Pre:    None
+        ///  Post:   A Matrix is defined with the same number of rows
+        ///          and columns as the source Matrix and with copies
+        ///          of the same components. 
+        ///  Param:  src - A Base_Matrix to be copied.
+        ////////////////////////////////////////////////////////////////
+        Matrix<T>(const Base_Matrix<T>& src);
+        
+        ////////////////////////////////////////////////////////////////
         ///  Func:   Matrix
         ///  Brief:  Initialization constructor for class. Creates a
         ///          Matrix with dimensions based on the sizes of the

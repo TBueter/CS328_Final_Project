@@ -63,12 +63,43 @@ Matrix<T>::Matrix(unsigned int rows, unsigned int cols, T value)
 template <class T>
 Matrix<T>::Matrix(const Matrix<T>& src)
 {   
-    cout << "HERE" << endl;
     m_rows = src.m_rows;
     m_cols = src.m_cols;
     m_size = m_rows*m_cols;
     ptr_to_data = new T[m_size];
     copy(src);
+}
+
+template <class T>
+Matrix<T>::Matrix(const Base_Matrix<T>& src)
+{
+    T* src_ptd = src.getPtr();
+    if(ptr_to_data != src_ptd && src_ptd != NULL)
+    {
+        m_rows = src.numRows();
+        m_cols = src.numCols();
+        m_size = m_rows*m_cols;
+        ptr_to_data = new T[m_size];
+        
+        T* p = ptr_to_data + m_size;
+        
+        for(int i = m_rows-1; i >= 0; i--)
+        {
+            for(int j = m_cols-1; j >= 0; j--)
+            {
+                *--p = src(i,j);
+            }
+        }
+    }
+    else if(src_ptd == NULL)
+    {
+        m_rows = 0;
+        m_cols = 0;
+        m_size = 0;
+        delete [] ptr_to_data;
+        ptr_to_data = NULL;
+    }
+
 }
 
 template <class T>
@@ -147,9 +178,9 @@ Matrix<T> Matrix<T>::operator*(const Base_Matrix<T>& rhs) const
                 sum += *--p * rhs(k,j);
             }
             C(i,j) = sum;
-            p += m_cols-i;
+            p += m_cols;
         }
-        p -= m_cols-i;
+        p -= m_cols;
     }
     
     return C;

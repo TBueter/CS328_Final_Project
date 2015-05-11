@@ -96,6 +96,20 @@ class SymmetricalMatrix : public Base_Matrix<T>
         ////////////////////////////////////////////////////////////////
         SymmetricalMatrix(const unsigned int order, const T value);
         
+        
+        ////////////////////////////////////////////////////////////////
+        ///  Func:   SymmetricalMatrix (Base_Matrix Copy)
+        ///  Brief:  Copy constructor for class. Creates a new Symmetrical Matrix 
+        ///          that is a clone of the given Base_Matrix (if it fits the Symmetrical
+        ///          matrix criteria.
+        ///  Pre:    None
+        ///  Post:   A Symmetrical Matrix is defined with the same order as the 
+        ///          source Symmetrical Matrix and with copies
+        ///          of the same components. 
+        ///  Param:  src - Another instance of a Symmetrical Matrix to be copied.
+        ////////////////////////////////////////////////////////////////
+        SymmetricalMatrix(const Base_Matrix<T>& src);
+        
         ////////////////////////////////////////////////////////////////
         ///  Func:   SymmetricalMatrix (Copy)
         ///  Brief:  Copy constructor for class. Creates a new Symmetrical Matrix 
@@ -299,6 +313,19 @@ class SymmetricalMatrix : public Base_Matrix<T>
         ///  Return: Returns reference of self.
         ////////////////////////////////////////////////////////////////
         SymmetricalMatrix<T>& operator=(const SymmetricalMatrix<T>& rhs);
+        
+        ////////////////////////////////////////////////////////////////
+        ///  Func:   += (Addition assignment)
+        ///  Brief:  Overloaded addition assignment operator for class. 
+        ///  Pre:    T += T (addition assignment) must be defined.
+        ///  Post:   If the Matrices are unequal sizes, an  
+        ///          incompatibility error is thrown.
+        ///          Otherwise, component values of *this are summed
+        ///          with those of rhs and returned as a new SymmetricalMatrix instance.
+        ///  Param:  rhs - Instance of a SymmetricalMatrix.
+        ///  Return: Returns the new Symmetrical Matrix instance.
+        ////////////////////////////////////////////////////////////////
+        SymmetricalMatrix<T> operator+(const SymmetricalMatrix<T>& rhs) const;
         
         ////////////////////////////////////////////////////////////////
         ///  Func:   += (Addition assignment)

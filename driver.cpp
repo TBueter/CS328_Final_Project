@@ -20,9 +20,14 @@
 ////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////
-///  Driver file for testing the Matrrix class and Gaussian
+///  Driver file for testing the Matrix class and Gaussian
 ///  Solver class implementations.
 ////////////////////////////////////////////////////////////////
+
+#define google_test_enabled true
+#include "test_vector.cpp"
+#include "test_symmetricalMatrix.cpp"
+#include "test_matrix.cpp"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,7 +38,11 @@
 #include <cmath>
 #include <cstring>
 #include <string>
-#include <vector>
+
+#if google_test_enabled
+  #include <gtest/gtest.h>
+#endif
+
 #include "Matrix.h"
 #include "SymmetricalMatrix.h"
 #include "Vector.h"
@@ -90,6 +99,22 @@ const Parameters<double> p = {0,PI,0,PI};
 
 int main(int argc, char* argv[])
 {
+     if(strcmp(argv[1],"--test") == 0)
+    {
+      /*
+       * If the '--test' flag is used then we only want to run the unit tests. So, here we go.
+       * gtest wasn't wanting to work correctly on the CS machines... Taking out for now.
+       */
+       #if google_test_enabled
+        ::testing::InitGoogleTest(&argc, argv);
+        return RUN_ALL_TESTS();
+       #else
+        cout<<"\nUnfortunately the gtest framework wasn't working right on the schools CS machines. So, it has been removed for now. :("<<endl;
+        cout<<"If, however, you know it installed then set the google_test_enabled value to 'true' and switch the CXXFLAGS in the makefile!\n\n"<<endl;
+        return 0;
+       #endif      
+    }
+    
     if(argc < 3)
     {
         cout << "Run information missing. Check parameters listed in ReadMe.txt." << endl;
@@ -107,13 +132,13 @@ int main(int argc, char* argv[])
     Vector<double> x_axis;
     Vector<double> y_axis;
     Vector<double> ans;
-    Vector<double> sol;
+    //Vector<double> sol;   //Unused now.
     
     //Setup general variables
     Central_Diff_Oh2 CD;
     CD.generate_Vector(b,N,p,x_l,x_u,y_l,y_u);
     CD.generate_Axes(x_axis,y_axis,N,p);
-    CD.generate_Solution(sol,N,p,solution);
+    //CD.generate_Solution(sol,N,p,solution); //Unused now.
     
     char method[10];
     strcpy(method, argv[2]);

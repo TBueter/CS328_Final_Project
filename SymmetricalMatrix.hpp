@@ -56,6 +56,44 @@ SymmetricalMatrix<T>::SymmetricalMatrix(const unsigned int order, const T value)
 }
 
 template <class T>
+SymmetricalMatrix<T>::SymmetricalMatrix(const Base_Matrix<T>& src)
+{
+    if(src.numRows() != src.numCols())
+        throw Incompatible_Matrix_Err();
+
+    T* src_ptd = src.getPtr();
+    if(ptr_to_data != src_ptd && src_ptd != NULL)
+    {
+        m_order = src.numRows();
+        m_size = (m_order*(m_order+1))/2;
+        ptr_to_data = new T[m_size];
+
+        for(int i = m_order-1; i >= 0; i--)
+        {
+            *(ptr_to_data + i*(2*m_order-i+1)/2) = src(i,i);
+            for(int j = m_order-1; j > i; j--)
+            {
+                if(src(i,j) != src(j,i))
+                {
+                    throw Incompatible_Matrix_Err();
+                }
+                else
+                {
+                    *(ptr_to_data + i*(2*m_order-i-1)/2+j) = src(i,j);
+                }
+            }
+        }
+    }
+    else if(src_ptd == NULL)
+    {
+        m_order = 0;
+        m_size = 0;
+        delete [] ptr_to_data;
+        ptr_to_data = NULL;
+    }
+}
+
+template <class T>
 SymmetricalMatrix<T>::SymmetricalMatrix(const SymmetricalMatrix<T>& src)
 {
     m_order = src.m_order;
@@ -270,6 +308,24 @@ SymmetricalMatrix<T>& SymmetricalMatrix<T>::operator=(const SymmetricalMatrix<T>
         copy(rhs);
     }
     return *this;
+}
+
+template <class T>
+SymmetricalMatrix<T> SymmetricalMatrix<T>::operator+(const SymmetricalMatrix<T>& rhs) const
+{
+    if(rhs.getOrder() != m_order)
+        throw Incompatible_Matrix_Err();
+    
+    SymmetricalMatrix<T> sum(m_order);
+    
+    for(int i = m_order-1; i >= 0; i--)
+    {
+        sum(i,i) = *(ptr_to_data + i*(2*m_order-i+1)/2) + rhs(i,i);
+        for(int j = m_order-1; j > i; j--)
+            sum(i,j) = *(ptr_to_data + i*(2*m_order-i-1)/2+j) + rhs(i,j);
+    }
+    
+    return sum;  
 }
 
 template <class T>

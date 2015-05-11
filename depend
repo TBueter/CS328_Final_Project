@@ -1,0 +1,3 @@
+test_matrix.o: test_matrix.cpp
+test_symmetricalMatrix.o: test_symmetricalMatrix.cpp
+test_vector.o: test_vector.cpp

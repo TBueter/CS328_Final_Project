@@ -27,7 +27,8 @@
 .PHONY: all clean
 
 CXX = /usr/bin/g++
-CXXFLAGS = -std=c++11 -g -Wall -W -pedantic-errors -Wunused-parameter
+# CXXFLAGS = -std=c++11 -g -Wall -W -pedantic-errors -Wunused-parameter 
+CXXFLAGS = -std=c++11 -lgtest -g -Wall -W -pedantic-errors -Wunused-parameter
 
 # With Sun's make it has to be done like this, instead of
 # using wildcards.
