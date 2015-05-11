@@ -160,13 +160,13 @@ int main(int argc, char* argv[])
         int type = atoi(argv[3]);
         if(type == STANDARD)
         {
-            filename << "_std";
+            filename << "_ge";
             CD.generate_Matrix(mat,N);
             ans = SOE_Solver()(mat,b);
         }
         else if(type == SYMMETRICAL)
         {
-            filename << "_sym";
+            filename << "_cd";
             CD.generate_Matrix(sym,N);
             ans = SOE_Solver()(sym,b);
         }
