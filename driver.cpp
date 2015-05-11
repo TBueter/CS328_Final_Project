@@ -24,7 +24,7 @@
 ///  Solver class implementations.
 ////////////////////////////////////////////////////////////////
 
-#define google_test_enabled true
+#define google_test_enabled false
 #include "test_vector.cpp"
 #include "test_symmetricalMatrix.cpp"
 #include "test_matrix.cpp"
@@ -40,7 +40,7 @@
 #include <string>
 
 #if google_test_enabled
-  #include <gtest/gtest.h>
+  #include "gtest/gtest.h"
 #endif
 
 #include "Matrix.h"
@@ -106,7 +106,7 @@ int main(int argc, char* argv[])
        * gtest wasn't wanting to work correctly on the CS machines... Taking out for now.
        */
        #if google_test_enabled
-        ::testing::InitGoogleTest(&argc, argv);
+        testing::InitGoogleTest(&argc, argv);
         return RUN_ALL_TESTS();
        #else
         cout<<"\nUnfortunately the gtest framework wasn't working right on the schools CS machines. So, it has been removed for now. :("<<endl;

@@ -20,9 +20,9 @@
 .PHONY: all clean
 
 CXX = /usr/bin/g++
-#CXXFLAGS = -std=c++11 -I.. -Wextra -pthread -g -Wall -W
+CXXFLAGS = -std=c++11 -I.. -Wextra -pthread -g -Wall -W
 #To run with the gtest framework, use the below CXXFLAGS.
-CXXFLAGS = -std=c++11 -I.. -Wextra -pthread -lgtest -g -Wall -W
+#CXXFLAGS = -std=c++11 -I.. -Wextra -pthread -lgtest -g -Wall -W
 #-pedantic-errors 
 
 # The following 2 lines only work with gnu make.
